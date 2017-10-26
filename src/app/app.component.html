@@ -1,0 +1,47 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="header">
+  <h1>
+    <span class="title">{{title}}</span>
+  </h1>
+</div>
+<div class="container panel panel-info">
+    <h2 style="font-weight: 700;">New Task</h2>
+    <form>
+      <div class="input-group">
+        <input #newTask type="text" [disabled]="taskInProg" style="font-weight: 600" class="form-control" placeholder="Enter Task Name" [(ngModel)]='taskName' name="taskName">
+        <div class="input-group-btn">
+          <button *ngIf="!taskInProg" (click)="startTask(newTask.value)" class="btn btn-primary" [disabled]="!taskName" type="button">Start Task</button>
+          <button *ngIf="taskInProg" (click)="addTask(newTask)" class="btn btn-danger" type="button">End Task</button>
+        </div>
+      </div>
+    </form>
+    <h2 *ngIf="taskTime<3600000">{{(taskTime/60000).toFixed(2)}} min</h2>
+    <h2 *ngIf="taskTime>=3600000">{{(taskTime/3600000).toFixed(2)}} hrs</h2>
+</div>
+<div class="container" >
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title">Task List</h2>
+      </div>                
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Task Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts | async">
+            <td>{{post.name}}</td>
+            <td>{{post.start|date:'medium'}}</td>
+            <td>{{post.end|date:'medium'}}</td>
+            <td *ngIf="post.duration<3600000">{{(post.duration/60000).toFixed(2)}} min</td>
+            <td *ngIf="post.duration>=3600000">{{(post.duration/3600000).toFixed(2)}} hrs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

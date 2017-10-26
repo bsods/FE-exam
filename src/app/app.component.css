@@ -1,0 +1,22 @@
+.title {
+    background: linear-gradient(#5C60E4, #00C8B3); 
+    color: #FFFFFF; 
+    padding: 10px; 
+    border-radius: 18px; 
+    font: arial; 
+    font-weight: 600;
+}
+
+.header {
+    text-align: center; 
+    margin: 30px 0 50px 0;
+}
+
+.panel-title {
+    font-weight: 700;
+}
+
+.container {
+    max-width: 750px;
+    margin-bottom: 30px;
+}
