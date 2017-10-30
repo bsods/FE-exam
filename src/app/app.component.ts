@@ -41,8 +41,8 @@ export class AppComponent {
     this.posts = this.postsCol.valueChanges();
   }
   
-  addPost() {
-    this.afs.collection('posts').add({'name': this.name, 'start': this.start, 'end': this.end, 'duration': this.duration});
+  ngAfterViewChecked() {
+    this.sortTable();
   }
   
   startTask(nTask: string) {
@@ -70,4 +70,27 @@ export class AppComponent {
     this.taskTime = 0;
     this.taskInProg = false;
   }
+    
+  sortTable() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("list");
+      switching = true;
+      while (switching) {
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[1];
+          y = rows[i + 1].getElementsByTagName("TD")[1];
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch= true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
 }
